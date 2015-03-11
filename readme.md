@@ -11,4 +11,4 @@ To install:
 To run:
 
 1. Run `npm start`
-2. Point your browser as http://localhost:3000
+2. Point your browser at http://localhost:3000
