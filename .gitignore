@@ -1,6 +1,0 @@
-# Dependency directory
-node_modules
-bower_components
-*.sublime-project
-*.iml
-.idea/
