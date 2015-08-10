@@ -18,7 +18,10 @@
     "gulp": "^3.9.0",
     "gulp-concat": "^2.6.0",
     "gulp-ng-annotate": "^1.1.0",
+    "gulp-ng-html2js": "^0.2.0",
     "gulp-rename": "^1.2.2",
-    "gulp-uglify": "^1.2.0"
+    "gulp-sourcemaps": "^1.5.2",
+    "gulp-uglify": "^1.2.0",
+    "gulp-watch": "^4.3.4"
   }
 }
