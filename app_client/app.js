@@ -19,6 +19,11 @@
         controller: 'loginCtrl',
         controllerAs: 'vm'
       })
+      .when('/profile', {
+        templateUrl: '/profile/profile.view.html',
+        controller: 'profileCtrl',
+        controllerAs: 'vm'
+      })
       .otherwise({redirectTo: '/'});
 
     // use the HTML5 History API

@@ -16,28 +16,10 @@ gulp.task('scripts', function() {
     .pipe(gulp.dest('public'));
 });
 
-gulp.task('views', function () {
-  return gulp.src("./app_client/**/*.html")
-    .pipe(ngHtml2Js({
-      moduleName: function (file) {
-        var pathParts = file.path.split('/');
-        var folder = pathParts[pathParts.length - 2];
-        return folder.replace(/-[a-z]/g, function (match) {
-          return match.substr(1).toUpperCase();
-        });
-      }
-    }))
-    .pipe(concat("views.min.js"))
-    .pipe(gulp.dest('public'));
-});
-
 gulp.task('watch', function() {
-  watch('./app_client/**/*.html', function () {
-    gulp.start('views');
-  });
   watch('./app_client/**/*.js', function () {
     gulp.start('scripts');
   });
 });
 
-gulp.task('default', ['scripts', 'views', 'watch']);
+gulp.task('default', ['scripts', 'watch']);
