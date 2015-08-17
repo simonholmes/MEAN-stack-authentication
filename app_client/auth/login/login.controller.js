@@ -8,10 +8,6 @@
   function loginCtrl($location) {
     var vm = this;
 
-    // vm.pageHeader = {
-    //   title: 'Sign in to Loc8r'
-    // };
-
     // vm.credentials = {
     //   email : "",
     //   password : ""

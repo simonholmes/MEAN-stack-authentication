@@ -11,10 +11,13 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+// [SH] Require Passport
+var passport = require('passport');
 
 // [SH] Bring in the data model
 require('./app_api/models/db');
-// require('./app_api/config/passport');
+// [SH] Bring in the Passport config after model is defined
+require('./app_api/config/passport');
 
 
 // [SH] Bring in the routes for the API (delete the default routes)
@@ -36,6 +39,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 // [SH] Set the app_client folder to serve static resources
 app.use(express.static(path.join(__dirname, 'app_client')));
 
+// [SH] Initialise Passport before using the route middleware
+app.use(passport.initialize());
 
 // [SH] Use the API routes when path starts with /api
 app.use('/api', routesApi);
@@ -55,6 +60,14 @@ app.use(function(req, res, next) {
 });
 
 // error handlers
+
+// [SH] Catch unauthorised errors
+app.use(function (err, req, res, next) {
+  if (err.name === 'UnauthorizedError') {
+    res.status(401);
+    res.json({"message" : err.name + ": " + err.message});
+  }
+});
 
 // development error handler
 // will print stacktrace

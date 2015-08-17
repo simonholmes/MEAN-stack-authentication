@@ -9,10 +9,6 @@ var sendJSONresponse = function(res, status, content) {
 
 module.exports.register = function(req, res) {
   console.log("Registering user: " + req.body.email);
-  res.status(200);
-  res.json({
-    "message" : "User registered: " + req.body.email
-  });
 
   // if(!req.body.name || !req.body.email || !req.body.password) {
   //   sendJSONresponse(res, 400, {
@@ -21,33 +17,26 @@ module.exports.register = function(req, res) {
   //   return;
   // }
 
-  // var user = new User();
+  var user = new User();
 
-  // user.name = req.body.name;
-  // user.email = req.body.email;
+  user.name = req.body.name;
+  user.email = req.body.email;
 
-  // user.setPassword(req.body.password);
+  user.setPassword(req.body.password);
 
-  // user.save(function(err) {
-  //   var token;
-  //   if (err) {
-  //     sendJSONresponse(res, 404, err);
-  //   } else {
-  //     token = user.generateJwt();
-  //     sendJSONresponse(res, 200, {
-  //       "token" : token
-  //     });
-  //   }
-  // });
+  user.save(function(err) {
+    var token;
+    token = user.generateJwt();
+    res.status(200);
+    res.json({
+      "token" : token
+    });
+  });
 
 };
 
 module.exports.login = function(req, res) {
   console.log("Logging in user: " + req.body.email);
-  res.status(200);
-  res.json({
-    "message" : "User logged in: " + req.body.email
-  });
 
   // if(!req.body.email || !req.body.password) {
   //   sendJSONresponse(res, 400, {
@@ -56,22 +45,26 @@ module.exports.login = function(req, res) {
   //   return;
   // }
 
-  // passport.authenticate('local', function(err, user, info){
-  //   var token;
+  passport.authenticate('local', function(err, user, info){
+    var token;
 
-  //   if (err) {
-  //     sendJSONresponse(res, 404, err);
-  //     return;
-  //   }
+    // If Passport throws/catches an error
+    if (err) {
+      res.status(404).json(err);
+      return;
+    }
 
-  //   if(user){
-  //     token = user.generateJwt();
-  //     sendJSONresponse(res, 200, {
-  //       "token" : token
-  //     });
-  //   } else {
-  //     sendJSONresponse(res, 401, info);
-  //   }
-  // })(req, res);
+    // If a user is found
+    if(user){
+      token = user.generateJwt();
+      res.status(200);
+      res.json({
+        "token" : token
+      });
+    } else {
+      // If user is not found
+      res.status(401).json(info);
+    }
+  })(req, res);
 
 };
