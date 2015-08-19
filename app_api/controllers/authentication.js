@@ -1,4 +1,4 @@
-// var passport = require('passport');
+var passport = require('passport');
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 
@@ -8,7 +8,6 @@ var sendJSONresponse = function(res, status, content) {
 };
 
 module.exports.register = function(req, res) {
-  console.log("Registering user: " + req.body.email);
 
   // if(!req.body.name || !req.body.email || !req.body.password) {
   //   sendJSONresponse(res, 400, {
@@ -36,7 +35,6 @@ module.exports.register = function(req, res) {
 };
 
 module.exports.login = function(req, res) {
-  console.log("Logging in user: " + req.body.email);
 
   // if(!req.body.email || !req.body.password) {
   //   sendJSONresponse(res, 400, {

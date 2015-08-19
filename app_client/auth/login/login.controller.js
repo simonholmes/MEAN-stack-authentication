@@ -14,14 +14,15 @@
     };
 
     vm.onSubmit = function () {
+      console.log('Submit login form:', vm.credentials);
       authentication
-      .login(vm.credentials)
-      .error(function(err){
-        alert(err);
-      })
-      .then(function(){
-        $location.path('profile');
-      });
+        .login(vm.credentials)
+        .error(function(err){
+          alert(err);
+        })
+        .then(function(){
+          $location.path('profile');
+        });
     };
 
   }

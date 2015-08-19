@@ -9,12 +9,13 @@
     var vm = this;
 
     vm.credentials = {
-      name : "",
+      name : "Simon",
       email : "",
       password : ""
     };
 
     vm.onSubmit = function () {
+      console.log('Submitting registration');
       authentication
         .register(vm.credentials)
         .error(function(err){
