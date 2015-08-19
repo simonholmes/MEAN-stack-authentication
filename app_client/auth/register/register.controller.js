@@ -9,7 +9,7 @@
     var vm = this;
 
     vm.credentials = {
-      name : "Simon",
+      name : "",
       email : "",
       password : ""
     };
